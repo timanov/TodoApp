@@ -105,10 +105,10 @@ public class User {
         this.roles = roles;
     }
 
-    public void addRole(Role role){
-        if (roles == null){
-            roles = new ArrayList<>();
-        }
-        roles.add(role);
-    }
+//    public void addRole(Role role){
+//        if (roles == null){
+//            roles = new ArrayList<>();
+//        }
+//        roles.add(role);
+//    }
 }

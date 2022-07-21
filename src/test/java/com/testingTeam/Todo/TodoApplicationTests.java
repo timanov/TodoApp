@@ -111,8 +111,8 @@ class TodoApplicationTests {
 
 	@Test
 	public void updateCourse(){
-		Course course = new Course();
-		course.setName("Course-test123");
+		Course course = courseRepo.findById(16L).get();
+		course.setName("Course-test123456");
 
 		courseRepo.save(course);
 	}
@@ -125,15 +125,13 @@ class TodoApplicationTests {
 
 	@Test
 	public void createLecture(){
-		Course course = new Course();
-		course.setName("Course-test");
+		Course course = courseRepo.findById(16L).get();
 
 		Lecture lecture = new Lecture();
 		lecture.setCourse(course);
 		lecture.setName("123");
 		lecture.setDescription("123");
 
-		courseRepo.save(course);
 		lectureRepo.save(lecture);
 	}
 
@@ -148,16 +146,14 @@ class TodoApplicationTests {
 	}
 
 	@Test
-	public void updateLecture(){ //вопрос
-		Course course = new Course();
-		course.setName("Course-test123");
+	public void updateLecture(){
+		Course course = courseRepo.findById(16L).get();
 
-		Lecture lecture = new Lecture();
+		Lecture lecture = lectureRepo.findById(27L).get();
 		lecture.setCourse(course);
-		lecture.setName("123");
-		lecture.setDescription("123");
+		lecture.setName("123456");
+		lecture.setDescription("123456");
 
-		courseRepo.save(course);
 		lectureRepo.save(lecture);
 	}
 

@@ -1,6 +1,7 @@
 package com.testingTeam.Todo.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Lecture {
@@ -13,7 +14,7 @@ public class Lecture {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE) // Добавил удаление
     @JoinColumn(name = "course_id")
     private Course course;
 

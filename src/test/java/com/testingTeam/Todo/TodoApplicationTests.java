@@ -3,6 +3,7 @@ package com.testingTeam.Todo;
 import com.testingTeam.Todo.Entities.Course;
 import com.testingTeam.Todo.Entities.Lecture;
 import com.testingTeam.Todo.Repo.CourseRepo;
+import com.testingTeam.Todo.Repo.LectureRepo;
 import com.testingTeam.Todo.Repo.RoleRepo;
 import com.testingTeam.Todo.Repo.UserRepo;
 import com.testingTeam.Todo.Entities.Role;
@@ -25,6 +26,9 @@ class TodoApplicationTests {
 
 	@Autowired
 	CourseRepo courseRepo;
+
+	@Autowired
+	LectureRepo lectureRepo;
 
 	@Test
 	void addUser() {
@@ -92,15 +96,23 @@ class TodoApplicationTests {
 		lecture2.setName("Lecture2");
 		lecture2.setDescription("Description-2");
 
-
-		System.out.println("Lecture-name: " + lecture.getName() + "\n"
-				+ "Lecture-Description: " + lecture.getDescription());
-
-		System.out.println("Lecture-name: " + lecture2.getName() + "\n"
-				+ "Lecture-Description: " + lecture2.getDescription());
-
 		course.addLecture(lecture);
 		course.addLecture(lecture2);
+
+		courseRepo.save(course);
+	}
+
+	@Test
+	public void getCourse(){
+		Course course = courseRepo.findById(16L).get();
+		System.out.println("Course-name: " + course.getName());
+	}
+
+
+	@Test
+	public void updateCourse(){
+		Course course = new Course();
+		course.setName("Course-test123");
 
 		courseRepo.save(course);
 	}
@@ -112,26 +124,47 @@ class TodoApplicationTests {
 	}
 
 	@Test
-	public void updateCourse(){
+	public void createLecture(){
+		Course course = new Course();
+		course.setName("Course-test");
+
+		Lecture lecture = new Lecture();
+		lecture.setCourse(course);
+		lecture.setName("123");
+		lecture.setDescription("123");
+
+		courseRepo.save(course);
+		lectureRepo.save(lecture);
+	}
+
+	@Test
+	public void getLecture(){
+		Lecture lecture = lectureRepo.findById(26L).get();
+		Course course = courseRepo.findById(16L).get();
+		System.out.println("Lecture-ID: " + lecture.getId());
+		System.out.println("Lecture-Name: " + lecture.getName());
+		System.out.println("Lecture-Description: " + lecture.getDescription());
+		System.out.println("Lecture-CourseName: " + course.getName());
+	}
+
+	@Test
+	public void updateLecture(){ //вопрос
 		Course course = new Course();
 		course.setName("Course-test123");
 
+		Lecture lecture = new Lecture();
+		lecture.setCourse(course);
+		lecture.setName("123");
+		lecture.setDescription("123");
+
 		courseRepo.save(course);
-	}
-
-	@Test
-	public void createLecture(){
-
-	}
-
-	@Test
-	public void updateLecture(){
-
+		lectureRepo.save(lecture);
 	}
 
 	@Test
 	public void deleteLecture(){
-
+		Lecture lecture = lectureRepo.findById(25L).get();
+		lectureRepo.delete(lecture);
 	}
 
 }

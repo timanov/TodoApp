@@ -1,19 +1,13 @@
 package com.testingTeam.Todo;
 
-import com.testingTeam.Todo.Entities.Course;
-import com.testingTeam.Todo.Entities.Lecture;
-import com.testingTeam.Todo.Repo.CourseRepo;
-import com.testingTeam.Todo.Repo.LectureRepo;
-import com.testingTeam.Todo.Repo.RoleRepo;
-import com.testingTeam.Todo.Repo.UserRepo;
-import com.testingTeam.Todo.Entities.Role;
-import com.testingTeam.Todo.Entities.User;
+import com.testingTeam.Todo.Entities.*;
+import com.testingTeam.Todo.Repo.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootTest
 class TodoApplicationTests {
@@ -30,10 +24,16 @@ class TodoApplicationTests {
 	@Autowired
 	LectureRepo lectureRepo;
 
+	@Autowired
+	StatusRepo statusRepo;
+
+	@Autowired
+	ListTodoRepo listTodoRepo;
+
 	@Test
 	void addUser() {
 //		User user = new User();
-//		user.setUsername("test123");
+//		user.setName("test123");
 //		user.setEmail("test123@mail.ru");
 //		user.setFirstName("testFirstName123");
 //		user.setMiddleName("testMiddleName123");
@@ -137,7 +137,7 @@ class TodoApplicationTests {
 
 	@Test
 	public void getLecture(){
-		Lecture lecture = lectureRepo.findById(26L).get();
+		Lecture lecture = lectureRepo.findById(29L).get();
 		Course course = courseRepo.findById(16L).get();
 		System.out.println("Lecture-ID: " + lecture.getId());
 		System.out.println("Lecture-Name: " + lecture.getName());
@@ -149,7 +149,7 @@ class TodoApplicationTests {
 	public void updateLecture(){
 		Course course = courseRepo.findById(16L).get();
 
-		Lecture lecture = lectureRepo.findById(27L).get();
+		Lecture lecture = lectureRepo.findById(28L).get();
 		lecture.setCourse(course);
 		lecture.setName("123456");
 		lecture.setDescription("123456");
@@ -159,8 +159,63 @@ class TodoApplicationTests {
 
 	@Test
 	public void deleteLecture(){
-		Lecture lecture = lectureRepo.findById(25L).get();
+		Lecture lecture = lectureRepo.findById(24L).get();
 		lectureRepo.delete(lecture);
 	}
 
+	@Test
+	public void getStatus(){
+		ArrayList<Status> status = (ArrayList<Status>) statusRepo.findAll();
+		status.forEach(s -> System.out.println(s.getName() + "\n" + s.getDescription() + "\n" + s.getRole()));
+	}
+
+	@Test
+	public void createTodo(){
+		Course course = courseRepo.findById(16L).get();
+		Lecture lecture = lectureRepo.findById(29L).get();
+		User user = userRepo.findByUsername("admin123");
+		Status status = statusRepo.findById(1L).get();
+
+		ListTodo listTodo = new ListTodo();
+		listTodo.setName("test-username1");
+		listTodo.setDescription("test-description1");
+		listTodo.setUpdateDate("20-07-2022 16:00");
+		listTodo.setVersion(1);
+		listTodo.setCourse(course);
+		listTodo.setLecture(lecture);
+		listTodo.setUser(user);
+		listTodo.setStatus(status);
+
+		listTodoRepo.save(listTodo);
+	}
+
+	@Test
+	public void getTodo(){
+		ListTodo listTodo = listTodoRepo.findById(2).get();
+		System.out.println("Todo-ID: " + listTodo.getId());
+		System.out.println("Todo-Name: " + listTodo.getName());
+		System.out.println("Todo-Description: " + listTodo.getDescription());
+		System.out.println("Todo-updateDate: " + listTodo.getUpdateDate());
+		System.out.println("Todo-version: " + listTodo.getVersion());
+		System.out.println("Todo-attach: " + Arrays.toString(listTodo.getAttach()));
+
+	}
+	@Test
+	public void updateTodo(){
+		ListTodo listTodo = listTodoRepo.findById(2).get();
+		listTodo.setName("test-username3");
+		listTodoRepo.save(listTodo);
+	}
+
+	@Test
+	public void deleteTodo(){
+		ListTodo listTodo = listTodoRepo.findById(2).get();
+		listTodoRepo.delete(listTodo);
+	}
+
+	//Задачи переименовать name
+	//Продолжим в понедельник
+	//Тесты дописать
+	//Новый слой
+	//Слой данных, слой бизнес-логики, слой-контроллеров
 }

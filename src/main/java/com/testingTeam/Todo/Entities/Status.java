@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Lecture {
+public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,13 +13,19 @@ public class Lecture {
 
     private String name;
 
-    private String description;
+    private String description;;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    private String role;
 
-    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+    public List<ListTodo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<ListTodo> todos) {
+        this.todos = todos;
+    }
+
+    @OneToMany(mappedBy = "status", cascade = CascadeType.PERSIST)
     private List<ListTodo> todos;
 
     public long getId() {
@@ -46,27 +52,20 @@ public class Lecture {
         this.description = description;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getRole() {
+        return role;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public List<ListTodo> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<ListTodo> todos) {
-        this.todos = todos;
-    }
     public void addTodo(ListTodo todo) {
 
         if (todos == null) {
             todos = new ArrayList<>();
         }
         todos.add(todo);
-        todo.setLecture(this);
+        todo.setStatus(this);
     }
 }

@@ -33,6 +33,9 @@ public class User {
     )
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ListTodo> todos;
+
     public long getId() {
         return id;
     }
@@ -105,10 +108,27 @@ public class User {
         this.roles = roles;
     }
 
-//    public void addRole(Role role){
+    public List<ListTodo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<ListTodo> todos) {
+        this.todos = todos;
+    }
+    //    public void addRole(Role role){
 //        if (roles == null){
 //            roles = new ArrayList<>();
 //        }
 //        roles.add(role);
 //    }
+
+    public void addTodo(ListTodo todo) {
+
+        if (todos == null) {
+            todos = new ArrayList<>();
+        }
+        todos.add(todo);
+        todo.setUser(this);
+    }
+
 }

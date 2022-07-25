@@ -4,33 +4,40 @@ import com.testingTeam.Todo.Entities.*;
 import com.testingTeam.Todo.Repo.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class TodoApplicationTests {
 
 	@Autowired
-	UserRepo userRepo;
+	private MockMvc mockMvc;
 
-	@Autowired
-	RoleRepo roleRepo;
+	@MockBean
+	private UserRepo userRepo;
 
-	@Autowired
-	CourseRepo courseRepo;
+	@MockBean
+	private RoleRepo roleRepo;
 
-	@Autowired
-	LectureRepo lectureRepo;
+	@MockBean
+	private CourseRepo courseRepo;
 
-	@Autowired
-	StatusRepo statusRepo;
+	@MockBean
+	private LectureRepo lectureRepo;
 
-	@Autowired
-	ListTodoRepo listTodoRepo;
+	@MockBean
+	private StatusRepo statusRepo;
 
-	@Test
+	@MockBean
+	private ListTodoRepo listTodoRepo;
+
+	@Test()
 	void addUser() {
 //		User user = new User();
 //		user.setName("test123");
@@ -213,9 +220,9 @@ class TodoApplicationTests {
 		listTodoRepo.delete(listTodo);
 	}
 
-	//Задачи переименовать name
-	//Продолжим в понедельник
-	//Тесты дописать
-	//Новый слой
-	//Слой данных, слой бизнес-логики, слой-контроллеров
+	@Test
+	public void testTodo() {
+		System.out.println("Тест пройден");
+	}
+
 }

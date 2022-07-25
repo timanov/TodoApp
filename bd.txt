@@ -1,6 +1,6 @@
 create table user(
 id int PRIMARY KEY AUTO_INCREMENT,
-name varchar(30),
+username varchar(30),
 password varchar(30),
 firstName varchar(30),
 lastName varchar(30),
@@ -65,6 +65,7 @@ FOREIGN KEY (status_id)
 REFERENCES status(id),
 FOREIGN KEY (lecture_id)
 REFERENCES lecture(id)
+)
 
 
 INSERT INTO `status`(`id`, `name`, `description`, `role`) VALUES ('1','Review','Review','user');

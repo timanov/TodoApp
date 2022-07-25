@@ -1,5 +1,7 @@
 package com.testingTeam.Todo.Entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

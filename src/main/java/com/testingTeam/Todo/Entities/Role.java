@@ -1,8 +1,14 @@
 package com.testingTeam.Todo.Entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
+
+@Getter
+@Setter
 @Entity
 public class Role {
 
@@ -15,20 +21,4 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -1,9 +1,15 @@
 package com.testingTeam.Todo.Entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Getter
+@Setter
 @Entity
 public class Course {
 
@@ -18,38 +24,6 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<ListTodo> todos;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Lecture> getLectures() {
-        return lectures;
-    }
-
-    public void setLectures(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
-
-    public List<ListTodo> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<ListTodo> todos) {
-        this.todos = todos;
-    }
 
     public void addLecture(Lecture lecture) {
 

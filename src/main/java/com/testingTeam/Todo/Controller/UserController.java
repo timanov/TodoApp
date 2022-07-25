@@ -3,9 +3,7 @@ package com.testingTeam.Todo.Controller;
 import com.testingTeam.Todo.Entities.User;
 import com.testingTeam.Todo.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -16,5 +14,14 @@ public class UserController {
     @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
+        System.out.println("Делаем POST запрос");
+    }
+
+    @GetMapping("/users/{username}")
+    public UserController getUser(@PathVariable("username") String username) {
+        userService.getUser(username);
+        System.out.println("Делаем GET запрос");
+
+        return this;
     }
 }

@@ -3,11 +3,13 @@ package com.testingTeam.Todo.Services;
 
 import com.testingTeam.Todo.Entities.Role;
 import com.testingTeam.Todo.Entities.User;
+import com.testingTeam.Todo.Entities.response.AuthenticationBean;
 import com.testingTeam.Todo.Repo.RoleRepo;
 import com.testingTeam.Todo.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Service
@@ -31,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String name) {
-        return null;
+        return userRepo.findByUsername(name);
     }
 
     @Override
@@ -42,6 +44,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public User deleteUser(String name) {
         return null;
+    }
+
+    //@Override
+    //public User getResponseBean(User user) {
+        AuthenticationBean authenticationBean = new AuthenticationBean(1, 0, "", "", "", "");
+
+        //Возвращаем вообще другой объект из других сущностей, из других объектов. Подумать, можно ли вынести в отдельные методы данную логику
+        //ПОсмотреть
+        //HttpSession session - в методе контроллера
+
+        // информация о моей сессии; HttpSession session;
+
+
+        //id пользователя
+        //в отдельном меттоде
+        //username тоже получит ьнужно
+        //token положить tokenSessionID
+        //в messages тоже вернуть
+        //role взять
+
     }
 
     @Override

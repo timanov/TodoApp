@@ -1,6 +1,7 @@
 package com.testingTeam.Todo.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -15,8 +16,10 @@ public class ListTodo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name; //на name в базе
+    @NotNull
+    private String name;
 
+    @NotNull
     private String description;
 
     private String updateDate;

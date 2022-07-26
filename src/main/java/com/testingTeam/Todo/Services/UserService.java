@@ -12,6 +12,9 @@ public interface UserService {
 
     public User deleteUser(String name);
 
+    public User getResponseBean(User user);
+
     User findByUsername(String login);
+
 
 }

@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //@Override
-    //public User getResponseBean(User user) {
+    public User getResponseBean(User user) {
         AuthenticationBean authenticationBean = new AuthenticationBean(1, 0, "", "", "", "");
 
         //Возвращаем вообще другой объект из других сущностей, из других объектов. Подумать, можно ли вынести в отдельные методы данную логику

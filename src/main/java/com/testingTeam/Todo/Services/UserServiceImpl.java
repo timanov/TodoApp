@@ -47,8 +47,12 @@ public class UserServiceImpl implements UserService {
     }
 
     //@Override
-    public User getResponseBean(User user) {
-        AuthenticationBean authenticationBean = new AuthenticationBean(1, 0, "", "", "", "");
+    public User getResponseBean(User user, HttpSession session) {
+        AuthenticationBean authenticationBean = new AuthenticationBean(user.getId(),
+                getError(), user.getUsername(), session.getId(), getMessage(), user.getRoles().get(1));
+
+
+
 
         //Возвращаем вообще другой объект из других сущностей, из других объектов. Подумать, можно ли вынести в отдельные методы данную логику
         //ПОсмотреть
@@ -64,10 +68,40 @@ public class UserServiceImpl implements UserService {
         //в messages тоже вернуть
         //role взять
 
+        return user;
     }
 
     @Override
     public User findByUsername(String login) {
         return null;
+    }
+
+    @Override
+    public void validationUser(User user) {
+        String responseMessage;
+        int errorCode = 0;
+
+
+        if (user.getUsername() == null) errorCode = 13;
+        else (user.getUsername() != null) errorCode
+
+
+
+        //Дальше проверка на логин, если есть, то
+
+        if (errorCode == 0)  responseMessage = "New user have been created";
+        else if (errorCode == 100)  { responseMessage = "Username has been authenticated"; errorCode = 0; }
+        else if (errorCode == 200)  { responseMessage = "Password will be changed"; errorCode = 0; }
+        else if (errorCode == 300)  { responseMessage = "Password has been changed"; errorCode = 0; }
+        else if (errorCode == 400)  { responseMessage = "User has been logged out successfully"; errorCode = 0; }
+        else if (errorCode == 500)  { responseMessage = "User has been deleted successfully"; errorCode = 0; }
+
+
+
+        //Маппить для юзера;
+
+        //Будем вызывать service и вот. Соблюсти код ошибок
+        //Switch. Внутри него будет для каждого свича будет отдельная проверка.
+
     }
 }

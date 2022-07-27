@@ -2,6 +2,8 @@ package com.testingTeam.Todo.Services;
 
 import com.testingTeam.Todo.Entities.User;
 
+import javax.servlet.http.HttpSession;
+
 public interface UserService {
 
     public void addUser(User user);
@@ -12,9 +14,11 @@ public interface UserService {
 
     public User deleteUser(String name);
 
-    public User getResponseBean(User user);
+    public User getResponseBean(User user, HttpSession session);
 
     User findByUsername(String login);
+
+    public void validationUser(User user);
 
 
 }

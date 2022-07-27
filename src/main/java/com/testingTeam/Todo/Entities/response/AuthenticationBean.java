@@ -29,4 +29,6 @@ public class AuthenticationBean {
         this.message = message;
         this.role = role;
     }
+
+    public AuthenticationBean() {}
 }
